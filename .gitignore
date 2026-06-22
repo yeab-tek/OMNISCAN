@@ -1,0 +1,4 @@
+omniscan_frontend/node_modules/
+omniscan_frontend/dist/
+omniscan_frontend/.env
+omniscan_frontend/.vite/
