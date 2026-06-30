@@ -67,7 +67,7 @@ export function NotificationsProvider({ children }: { children: ReactNode }) {
 
     const poll = async () => {
       try {
-        const counts = await api.get<BackendCounts>('/api/notifications/unread-count');
+        const counts = await api.get<BackendCounts>('/api/v1/dashboard/summary');
         const total = counts.total ?? 0;
         if (total > lastTotal) {
           const diff = total - lastTotal;

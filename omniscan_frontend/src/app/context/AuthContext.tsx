@@ -46,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
     api
-      .get<StoredUser>('/api/auth/me')
+      .get<StoredUser>('/api/v1/auth/me')
       .then((me) => {
         setStoredUser(me);
         setUser(me);
@@ -75,7 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 1500);
         const res = await api.post<LoginResponse>(
-          '/api/auth/login',
+          '/api/v1/auth/login',
           { email, password },
           { noAuth: true, signal: controller.signal }
         );

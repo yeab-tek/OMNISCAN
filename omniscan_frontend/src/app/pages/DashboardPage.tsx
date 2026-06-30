@@ -67,11 +67,11 @@ export function DashboardPage() {
   useEffect(() => {
     let cancelled = false;
 
-    api.get<DashboardSummary>('/api/dashboard/summary').then((d) => {
+    api.get<DashboardSummary>('/api/v1/dashboard/summary').then((d) => {
       if (!cancelled && d && Object.keys(d).length) setSummary(d);
     }).catch(() => {});
 
-    api.get<PaymentBreakdownRow[]>('/api/dashboard/payment-breakdown').then((rows) => {
+    api.get<PaymentBreakdownRow[]>('/api/v1/dashboard/summary').then((rows) => {
       if (!cancelled && rows?.length) {
         setPaymentData(
           rows.map((r) => ({
@@ -83,13 +83,13 @@ export function DashboardPage() {
       }
     }).catch(() => {});
 
-    api.get<MonthlyRow[]>('/api/dashboard/po-by-month').then((rows) => {
+    api.get<MonthlyRow[]>('/api/v1/dashboard/summary').then((rows) => {
       if (!cancelled && rows?.length) {
         setMonthlyData(rows.map((r) => ({ month: r.month, uploads: Number(r.total) })));
       }
     }).catch(() => {});
 
-    api.get<UpcomingDeadline[]>('/api/po/upcoming-deadlines').then((rows) => {
+    api.get<UpcomingDeadline[]>('/api/v1/dashboard/deadlines').then((rows) => {
       if (!cancelled && rows?.length) {
         setUpcomingShipments(
           rows.slice(0, 5).map((r, i) => ({

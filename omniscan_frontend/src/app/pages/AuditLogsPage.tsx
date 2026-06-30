@@ -75,7 +75,7 @@ export function AuditLogsPage() {
     try {
       const params = new URLSearchParams({ page: '1', limit: '50' });
       Object.entries(filters).forEach(([k, v]) => v && params.set(k, v));
-      const data = await api.get<AuditLogListResponse>(`/api/audit?${params}`);
+      const data = await api.get<AuditLogListResponse>(`/api/v1/dashboard/audit-log?${params}`);
       setLogs(data.items);
       setTotal(data.total);
       setUsingFallback(false);
@@ -95,7 +95,7 @@ export function AuditLogsPage() {
 
   const handleExportCsv = async () => {
     try {
-      const blob = await api.blob('/api/audit/export');
+      const blob = await api.blob('/api/v1/dashboard/audit-log');
       downloadBlob(blob, 'omniscan_audit_log.csv');
       toast.success('Audit log exported');
     } catch (err) {
